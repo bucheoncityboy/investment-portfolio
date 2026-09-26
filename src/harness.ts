@@ -24,6 +24,7 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "order-route test framing", fragment: "SYSTEMATIC INVESTING <i>·</i> ACCOUNT ORDER TEST" },
   { label: "operations section uses tested-order wording", fragment: "US Strategy · Order-Route Test" },
   { label: "operations intro limits the claim to fills checked", fragment: "주문 생성과 실계좌 체결 확인으로 이어지는 절차를 설계했습니다." },
+  { label: "step 08 uses position ledger wording", fragment: "<strong>Position / Ledger</strong>" },
   { label: "walk-forward and transaction-cost validation", fragment: "시간순 5개 Fold로 Walk-Forward" },
   { label: "execution evidence without a long-term claim", fragment: "29 BUY + 29 SELL FILLS CONFIRMED" },
   { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },

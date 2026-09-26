@@ -288,29 +288,17 @@ a:focus-visible {
 .mono { font-family: var(--mono); }
 
 .flow-stack {
-  position: relative;
   display: grid;
   gap: 0;
   margin-top: 23px;
 }
 
-.flow-stack::before {
-  position: absolute;
-  top: 14px;
-  bottom: 18px;
-  left: 37px;
-  width: 1px;
-  background: #cbd5e2;
-  content: "";
-}
-
 .flow-step {
-  position: relative;
   min-height: 56px;
   display: grid;
-  grid-template-columns: 29px 17px minmax(100px, .85fr) minmax(115px, 1fr);
+  grid-template-columns: 29px minmax(120px, .9fr) minmax(130px, 1fr);
   align-items: center;
-  column-gap: 11px;
+  column-gap: 12px;
 }
 
 .flow-index {
@@ -318,33 +306,6 @@ a:focus-visible {
   font-family: var(--mono);
   font-size: 9px;
 }
-
-.flow-node {
-  width: 11px;
-  height: 11px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  border: 1px solid #91a4bf;
-  border-radius: 50%;
-  background: #fbfcfd;
-}
-
-.flow-node span {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--blue);
-}
-
-.flow-step:first-child .flow-node,
-.flow-step-last .flow-node {
-  border-color: var(--blue);
-  background: var(--blue);
-}
-
-.flow-step:first-child .flow-node span,
-.flow-step-last .flow-node span { background: white; }
 
 .flow-label {
   color: var(--navy);
@@ -912,8 +873,8 @@ a:focus-visible {
   .hero-english { max-width: 420px; font-size: 11px; }
   .hero-actions { gap: 17px; margin-top: 23px; }
   .hero-visual { width: 100%; min-height: 335px; padding-inline: 20px; }
-  .flow-step { grid-template-columns: 25px 17px minmax(95px, .8fr) minmax(105px, 1fr); column-gap: 9px; }
-  .flow-stack::before { left: 33px; }
+  .flow-step { grid-template-columns: 25px minmax(0, 1fr); column-gap: 9px; row-gap: 2px; padding-block: 6px; }
+  .flow-detail { grid-column: 2; text-align: left; }
   .hero-bottomline { margin-top: 39px; font-size: 7px; }
   .hero-bottomline > span { max-width: 62%; }
 

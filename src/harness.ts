@@ -19,10 +19,11 @@ assert.ok(existsSync(workflowPath), "the GitHub Pages workflow must exist");
 const html: string = readFileSync(indexPath, "utf8");
 const workflow: string = readFileSync(workflowPath, "utf8");
 const requiredContent: ReadonlyArray<ContentCheck> = [
-  { label: "investment-first hero statement", fragment: "검증된 로직을 실제 운용까지 연결합니다." },
-  { label: "the flagship US strategy", fragment: "미국 대형주 전략 검증 및<br>실계좌 운용 파이프라인" },
+  { label: "investment-first hero statement", fragment: "검증된 로직을 목표비중 산출과 실계좌 주문 실행까지 연결합니다." },
+  { label: "the flagship US strategy", fragment: "미국 대형주 전략 검증 및<br>실계좌 주문 파이프라인" },
   { label: "order-route test framing", fragment: "SYSTEMATIC INVESTING <i>·</i> ACCOUNT ORDER TEST" },
   { label: "operations section uses tested-order wording", fragment: "US Strategy · Order-Route Test" },
+  { label: "operations intro limits the claim to fills checked", fragment: "주문 생성과 실계좌 체결 확인으로 이어지는 절차를 설계했습니다." },
   { label: "walk-forward and transaction-cost validation", fragment: "시간순 5개 Fold로 Walk-Forward" },
   { label: "execution evidence without a long-term claim", fragment: "29 BUY + 29 SELL FILLS CONFIRMED" },
   { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },
@@ -49,7 +50,7 @@ for (const check of requiredContent) {
 }
 
 const projectTitles: string[] = [
-  "미국 대형주 전략 검증 및<br>실계좌 운용 파이프라인",
+  "미국 대형주 전략 검증 및<br>실계좌 주문 파이프라인",
   "AI/ML 기반 하방위험 예측 및<br>포지션 사이징 연구",
   "K-Skill 오픈소스 반영:<br>금융시장 리서치 프로세스 자동화",
   "원자료 기반 Fama-French 팩터 구축 및 시장별 실증검증",
@@ -84,6 +85,8 @@ const repositoryLinks: RegExpMatchArray[] = Array.from(
 assert.ok(repositoryLinks.length >= 6, "Project cards must link to their public GitHub repositories");
 assert.doesNotMatch(html, /\b010[- ]\d{3,4}[- ]\d{4}\b/, "A phone number must not be published");
 assert.doesNotMatch(html, /US Factor Live Execution|LIVE EXECUTION TRACKED/, "Order-route testing must not imply sustained live operations");
+assert.doesNotMatch(html, /실제\s*운용|live operations|live portfolio|production trading|real portfolio operations|실제 투자 운용/i, "The portfolio must not claim sustained real-account operations");
+assert.match(html, /체결 건수는 주문 경로 테스트 결과이며 장기 운용 성과를 뜻하지 않습니다\./);
 passedChecks.push("public project links and contact privacy");
 
 assert.match(workflow, /actions\/upload-pages-artifact@v4/);
@@ -97,7 +100,10 @@ const stylesheet: string = readFileSync(stylesheetPath, "utf8");
 assert.match(stylesheet, /@media \(max-width: 720px\)/);
 assert.match(stylesheet, /\.project-grid, \.additional-grid \{ grid-template-columns: 1fr/);
 assert.match(stylesheet, /\.project-cross-market \{ grid-column: 1 \/ -1; \}/);
-passedChecks.push("responsive desktop and mobile project-card rules");
+assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
+assert.match(stylesheet, /\.ops-summary \{[\s\S]*?background: #18233a;/);
+assert.match(stylesheet, /\.ops-steps::before \{[\s\S]*?background: #c8d2df;/);
+passedChecks.push("responsive cards and light workflow with a navy summary card");
 
 for (const check of passedChecks) {
   console.log("PASS " + check);

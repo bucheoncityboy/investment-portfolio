@@ -653,13 +653,14 @@ a:focus-visible {
 .automation-flow-final { color: var(--navy); font-weight: 600; }
 
 .operations-section {
-  background: var(--navy);
-  color: white;
+  border-block: 1px solid #e1e6ed;
+  background: #f1f3f6;
+  color: #25324a;
 }
 
-.section-heading-light h2 { color: white; }
-.section-heading-light .eyebrow { color: #9db4d2; }
-.section-heading-light .section-intro { color: #bdc7d6; }
+.section-heading-light h2 { color: #18233a; }
+.section-heading-light .eyebrow { color: #4169a1; }
+.section-heading-light .section-intro { color: #667085; }
 
 .ops-layout {
   display: grid;
@@ -683,7 +684,7 @@ a:focus-visible {
   bottom: 22px;
   left: 14px;
   width: 1px;
-  background: #506078;
+  background: #c8d2df;
   content: "";
 }
 
@@ -694,7 +695,7 @@ a:focus-visible {
   grid-template-columns: 30px minmax(190px, 1fr) minmax(165px, .8fr);
   align-items: center;
   gap: 13px;
-  border-bottom: 1px solid rgba(203, 213, 226, .12);
+  border-bottom: 1px solid #dde3ea;
 }
 
 .ops-index {
@@ -703,31 +704,31 @@ a:focus-visible {
   height: 29px;
   display: grid;
   place-items: center;
-  border: 1px solid #65748b;
+  border: 1px solid #aebbcb;
   border-radius: 50%;
-  background: var(--navy);
-  color: #afbdd0;
+  background: #ffffff;
+  color: #6f7e94;
   font: 8px var(--mono);
 }
 
 .ops-steps li:first-child .ops-index,
 .ops-steps li:last-child .ops-index {
-  border-color: #adc0db;
-  background: #dbe6f3;
-  color: var(--navy);
+  border-color: #6f89ac;
+  background: #e7eef7;
+  color: #27466e;
 }
 
-.ops-steps strong { color: #f3f6fa; font-size: 12px; font-weight: 500; }
-.ops-tag { color: #9ba9bd; font: 8px var(--mono); text-align: right; }
+.ops-steps strong { color: #25324a; font-size: 12px; font-weight: 500; }
+.ops-tag { color: #7a8699; font: 8px var(--mono); text-align: right; }
 
 .ops-summary {
   position: sticky;
   top: 100px;
   min-height: 285px;
   padding: 24px;
-  border: 1px solid #4b5a71;
+  border: 1px solid #34445f;
   border-radius: 6px;
-  background: rgba(255, 255, 255, .035);
+  background: #18233a;
 }
 
 .ops-summary-mark {

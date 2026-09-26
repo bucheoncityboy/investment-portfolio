@@ -22,6 +22,7 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "investment-first hero statement", fragment: "검증된 로직을 실제 운용까지 연결합니다." },
   { label: "the flagship US strategy", fragment: "미국 대형주 전략 검증 및<br>실계좌 운용 파이프라인" },
   { label: "order-route test framing", fragment: "SYSTEMATIC INVESTING <i>·</i> ACCOUNT ORDER TEST" },
+  { label: "operations section uses tested-order wording", fragment: "US Strategy · Order-Route Test" },
   { label: "walk-forward and transaction-cost validation", fragment: "시간순 5개 Fold로 Walk-Forward" },
   { label: "execution evidence without a long-term claim", fragment: "29 BUY + 29 SELL FILLS CONFIRMED" },
   { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },
@@ -82,6 +83,7 @@ const repositoryLinks: RegExpMatchArray[] = Array.from(
 );
 assert.ok(repositoryLinks.length >= 6, "Project cards must link to their public GitHub repositories");
 assert.doesNotMatch(html, /\b010[- ]\d{3,4}[- ]\d{4}\b/, "A phone number must not be published");
+assert.doesNotMatch(html, /US Factor Live Execution|LIVE EXECUTION TRACKED/, "Order-route testing must not imply sustained live operations");
 passedChecks.push("public project links and contact privacy");
 
 assert.match(workflow, /actions\/upload-pages-artifact@v4/);

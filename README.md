@@ -2,6 +2,8 @@
 
 A responsive, static portfolio site designed for GitHub Pages. The content follows the portfolio brief and links to the public project repositories in the portfolio index.
 
+Live site: https://bucheoncityboy.github.io/investment-portfolio/
+
 ## Preview locally
 
 Open index.html in a browser. The site uses no build step or JavaScript.

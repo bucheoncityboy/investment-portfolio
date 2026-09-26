@@ -629,8 +629,9 @@ a:focus-visible {
   padding: 28px 32px;
 }
 
-.project-automation h3 { margin: 19px 0 8px; color: var(--navy); font-size: 25px; font-weight: 600; letter-spacing: -.05em; }
+.project-automation h3 { margin: 19px 0 13px; color: var(--navy); font-size: 25px; font-weight: 600; letter-spacing: -.05em; }
 .project-automation .project-description { max-width: 720px; font-size: 12px; }
+.project-automation .project-description + .project-description { margin-top: 10px; }
 .project-badge-light { margin-left: 2px; color: #65748b; background: #f8fafc; }
 .source-list { display: flex; flex-wrap: wrap; gap: 9px; min-width: 0; margin: 16px 0 0; color: #53627a; font: 9px var(--mono); }
 .source-list span { white-space: nowrap; }

@@ -102,9 +102,11 @@ assert.match(stylesheet, /@media \(max-width: 720px\)/);
 assert.match(stylesheet, /\.project-grid, \.additional-grid \{ grid-template-columns: 1fr/);
 assert.match(stylesheet, /\.project-cross-market \{ grid-column: 1 \/ -1; \}/);
 assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
-assert.match(stylesheet, /\.ops-summary \{[\s\S]*?background: #18233a;/);
+assert.match(stylesheet, /\.ops-layout \{\s*display: block;\s*\}/);
 assert.match(stylesheet, /\.ops-steps::before \{[\s\S]*?background: #c8d2df;/);
-passedChecks.push("responsive cards and light workflow with a navy summary card");
+assert.doesNotMatch(html, /THE THROUGH-LINE|A research process is complete when the decision can be reviewed, repeated, and operated\.|RESEARCH <span>→<\/span> DECISION/);
+assert.doesNotMatch(stylesheet, /\.ops-summary/);
+passedChecks.push("responsive light workflow without the through-line card");
 
 for (const check of passedChecks) {
   console.log("PASS " + check);

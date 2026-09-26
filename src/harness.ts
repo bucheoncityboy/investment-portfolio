@@ -20,6 +20,11 @@ const html: string = readFileSync(indexPath, "utf8");
 const workflow: string = readFileSync(workflowPath, "utf8");
 const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "the flagship factor strategy", fragment: "US Large-Cap Factor Strategy" },
+  { label: "live execution wording", fragment: "US Large-Cap Factor Strategy<br>&amp; Live Execution" },
+  { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },
+  { label: "official Certified Investment Manager title", fragment: "Certified Investment Manager" },
+  { label: "the merged K-Skill contribution", fragment: "K-SKILL · OFFICIAL CONTRIBUTOR" },
+  { label: "the K-Skill pull request proof link", fragment: "https://github.com/NomaDamas/k-skill/pull/675" },
   { label: "HAQR position sizing", fragment: "Uncertainty-Aware" },
   { label: "Fama-French research", fragment: "Fama-French: US Replication" },
   { label: "multi-asset automation", fragment: "Multi-Asset Research Automation" },

@@ -270,10 +270,7 @@ a:focus-visible {
   padding: 22px 27px 19px;
   border: 1px solid #dce2eb;
   border-radius: 8px;
-  background:
-    linear-gradient(90deg, transparent 49.8%, rgba(229, 233, 240, .6) 50%, transparent 50.2%),
-    linear-gradient(0deg, transparent 49.8%, rgba(229, 233, 240, .6) 50%, transparent 50.2%),
-    #fbfcfd;
+  background: #fbfcfd;
   box-shadow: 0 13px 32px rgba(24, 35, 58, .035);
 }
 

@@ -640,6 +640,22 @@ a:focus-visible {
 .project-automation blockquote { margin: 17px 0 0; padding-left: 11px; border-left: 2px solid #8397b2; color: #748096; font-size: 11px; font-style: italic; }
 .project-automation .card-link { margin-top: 15px; }
 
+@media (min-width: 721px) and (max-width: 882px) {
+  .project-standard:has(.source-list) .compact-process {
+    display: grid;
+    width: max-content;
+    max-width: 100%;
+    grid-template-columns: max-content max-content;
+    column-gap: 9px;
+    row-gap: 8px;
+  }
+
+  .project-standard:has(.source-list) .compact-process .process-item-last {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
 .automation-flow {
   align-self: center;
   display: flex;

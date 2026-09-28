@@ -476,6 +476,8 @@ a:focus-visible {
 }
 
 .project-featured-main > .project-description { max-width: 690px; }
+#work .project-featured-main > .project-description + .project-description { margin-top: 17px; }
+#work .project-standard .project-description + .project-description { margin-top: 14px; }
 
 .process-line,
 .compact-process {
@@ -576,6 +578,14 @@ a:focus-visible {
   color: #7a8799;
   font: 9px var(--mono);
   letter-spacing: .04em;
+}
+
+#work .detail-label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--blue);
+  font: 600 9px var(--mono);
+  letter-spacing: .08em;
 }
 
 .metric-pair {
@@ -916,6 +926,8 @@ a:focus-visible {
   .project-badge { font-size: 7px; }
   .project-featured h3 { font-size: 25px; }
   .project-description { font-size: 11px; }
+  #work .project-featured-main > .project-description + .project-description { margin-top: 14px; }
+  #work .project-standard .project-description + .project-description { margin-top: 12px; }
   .process-line { gap: 6px 9px; font-size: 8px; }
   .compact-process { font-size: 8px; }
   .project-featured-side { min-height: 182px; padding: 18px 21px 16px; border-top: 1px solid #e4e9f0; border-left: 0; }

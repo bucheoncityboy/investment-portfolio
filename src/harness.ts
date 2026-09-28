@@ -26,16 +26,23 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "operations data step no longer references Fama-French", fragment: "<strong>Data</strong><span class=\"ops-tag\">Financial Data · Morning Brief</span>" },
   { label: "operations intro limits the claim to fills checked", fragment: "주문 생성과 실계좌 체결 확인으로 이어지는 절차를 설계했습니다." },
   { label: "step 08 uses position ledger wording", fragment: "<strong>Position / Ledger</strong>" },
-  { label: "walk-forward and transaction-cost validation", fragment: "시간순 5개 Fold로 Walk-Forward" },
+  { label: "investment strategy out-of-sample and transaction-cost validation", fragment: "시간순 5개 Fold의 Walk-Forward 방식" },
+  { label: "investment strategy tracks rebalancing from current positions", fragment: "현재 포지션과 비교해 리밸런싱과 주문이 생성되도록 구현했습니다." },
+  { label: "execution results flow into the ledger and positions", fragment: "체결 결과가 Excel 원장과 보유 포지션에 반영되도록 구성했습니다." },
   { label: "execution evidence without a long-term claim", fragment: "29 BUY + 29 SELL FILLS CONFIRMED" },
   { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },
   { label: "official Certified Investment Manager title", fragment: "Certified Investment Manager" },
   { label: "the merged K-Skill contribution", fragment: "K-SKILL · OFFICIAL CONTRIBUTOR" },
   { label: "the K-Skill pull request proof link", fragment: "https://github.com/NomaDamas/k-skill/pull/675" },
   { label: "HAQR downside risk and position sizing", fragment: "AI/ML 기반 하방위험 예측 및<br>포지션 사이징 연구" },
+  { label: "HAQR card explains its investment problem in plain language", fragment: "기존 메타라벨링은 거래의 진입 여부를 판단하는 데 유용하지만" },
+  { label: "HAQR card has a descriptive subtitle", fragment: "Conditional Return Distribution &amp; Position Sizing" },
   { label: "HAQR quantified research results", fragment: "91.48%" },
-  { label: "K-Skill finance research workflow", fragment: "글로벌마켓학회에서 일간·주간 브리핑" },
-  { label: "K-Skill source and missing-data checks", fragment: "미확보 값은 임의 보완하지 않도록 했습니다." },
+  { label: "K-Skill workflow is organized around recurring date checks", fragment: "시장별 거래일과 데이터 제공기관, 업데이트 시점이 달라 기준일을 반복해서 확인해야 했습니다." },
+  { label: "K-Skill workflow is reusable by AI agents", fragment: "각 단계의 판단 기준을 규칙화해 AI 에이전트가 재사용할 수 있는 워크플로로 구현했습니다." },
+  { label: "K-Skill source and missing-data checks", fragment: "확보하지 못한 값은 임의로 채우지 않았습니다." },
+  { label: "K-Skill workflow cuts briefing preparation time", fragment: "약 40분 걸리던 시장데이터 수집과 브리핑 작성 시간을 10분 이내로 줄였고" },
+  { label: "K-Skill workflow was adopted as an official feature", fragment: "Multi-Asset Morning Briefing’ 정식 기능으로 채택됐습니다." },
   { label: "HY-FIN activity retains Fama-French research", fragment: "Fama-French Research" },
   { label: "four ISAAC-relevant competency axes", fragment: "AI &amp; Data for Investment" },
   { label: "the additional rates research", fragment: "KRW Rates &amp; BOK Policy" },
@@ -59,6 +66,7 @@ const projectTitles: string[] = [
 const selectedWork: string = html.split('id="work"')[1]?.split('id="research"')[0] ?? "";
 assert.equal((selectedWork.match(/<article class="project-card/g) ?? []).length, 3, "Selected Work must contain exactly three projects");
 assert.doesNotMatch(selectedWork, /Fama-French|fama-french|GRS Bootstrap p = 0\.010|Korea HML t = 3\.89/, "The Fama-French project must be removed from Selected Work");
+assert.doesNotMatch(selectedWork, /HAQR/, "The HAQR acronym must not be prominent in Selected Work");
 const projectTitlePositions: number[] = projectTitles.map((title: string): number => selectedWork.indexOf(title));
 assert.ok(projectTitlePositions.every((position: number): boolean => position >= 0), "All three requested projects must appear in Selected Work");
 const researchWorkflow: string = html.split('<section class="section operations-section" id="research">')[1]?.split("</section>")[0] ?? "";
@@ -95,7 +103,7 @@ assert.doesNotMatch(html, /href="https:\/\/github\.com\/bucheoncityboy\/portfoli
 assert.doesNotMatch(html, /\b010[- ]\d{3,4}[- ]\d{4}\b/, "A phone number must not be published");
 assert.doesNotMatch(html, /US Factor Live Execution|LIVE EXECUTION TRACKED/, "Order-route testing must not imply sustained live operations");
 assert.doesNotMatch(html, /실제\s*운용|live operations|live portfolio|production trading|real portfolio operations|실제 투자 운용/i, "The portfolio must not claim sustained real-account operations");
-assert.match(html, /체결 건수는 주문 경로 테스트 결과이며 장기 운용 성과를 뜻하지 않습니다\./);
+assert.match(html, /체결 건수는 주문 경로 테스트 결과이며 장기 투자성과를 의미하지 않습니다\./);
 passedChecks.push("public project links and contact privacy");
 
 assert.match(workflow, /actions\/upload-pages-artifact@v4/);
@@ -110,6 +118,9 @@ assert.match(stylesheet, /@media \(max-width: 720px\)/);
 assert.match(stylesheet, /\.project-grid, \.additional-grid \{ grid-template-columns: 1fr/);
 assert.match(stylesheet, /\.project-grid \{\s*display: grid;\s*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
 assert.doesNotMatch(stylesheet, /project-cross-market/, "Fama-French-only grid styling must be removed");
+assert.match(stylesheet, /#work \.project-featured-main > \.project-description \+ \.project-description \{ margin-top: 17px; \}/);
+assert.match(stylesheet, /#work \.project-standard \.project-description \+ \.project-description \{ margin-top: 14px; \}/);
+assert.match(stylesheet, /#work \.detail-label \{\s*display: block;\s*margin: 0 0 6px;\s*color: var\(--blue\);\s*font: 600 9px var\(--mono\);/);
 assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
 assert.match(stylesheet, /\.ops-layout \{\s*display: block;\s*\}/);
 assert.match(stylesheet, /\.ops-steps::before \{[\s\S]*?background: #c8d2df;/);

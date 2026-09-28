@@ -23,6 +23,7 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "the flagship US strategy", fragment: "미국 대형주 전략 검증 및<br>실계좌 주문 파이프라인" },
   { label: "order-route test framing", fragment: "SYSTEMATIC INVESTING <i>·</i> ACCOUNT ORDER TEST" },
   { label: "operations section uses tested-order wording", fragment: "US Strategy · Order-Route Test" },
+  { label: "operations data step no longer references Fama-French", fragment: "<strong>Data</strong><span class=\"ops-tag\">Financial Data · Morning Brief</span>" },
   { label: "operations intro limits the claim to fills checked", fragment: "주문 생성과 실계좌 체결 확인으로 이어지는 절차를 설계했습니다." },
   { label: "step 08 uses position ledger wording", fragment: "<strong>Position / Ledger</strong>" },
   { label: "walk-forward and transaction-cost validation", fragment: "시간순 5개 Fold로 Walk-Forward" },
@@ -35,7 +36,7 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "HAQR quantified research results", fragment: "91.48%" },
   { label: "K-Skill finance research workflow", fragment: "글로벌마켓학회에서 일간·주간 브리핑" },
   { label: "K-Skill source and missing-data checks", fragment: "미확보 값은 임의 보완하지 않도록 했습니다." },
-  { label: "Fama-French original-data replication", fragment: "원자료 기반 Fama-French 팩터 구축 및 시장별 실증검증" },
+  { label: "HY-FIN activity retains Fama-French research", fragment: "Fama-French Research" },
   { label: "four ISAAC-relevant competency axes", fragment: "AI &amp; Data for Investment" },
   { label: "the additional rates research", fragment: "KRW Rates &amp; BOK Policy" },
   { label: "the additional K-ICS research", fragment: "Dynamic K-ICS FX Hedging" },
@@ -54,16 +55,21 @@ const projectTitles: string[] = [
   "미국 대형주 전략 검증 및<br>실계좌 주문 파이프라인",
   "AI/ML 기반 하방위험 예측 및<br>포지션 사이징 연구",
   "K-Skill 오픈소스 반영:<br>금융시장 리서치 프로세스 자동화",
-  "원자료 기반 Fama-French 팩터 구축 및 시장별 실증검증",
 ];
 const selectedWork: string = html.split('id="work"')[1]?.split('id="research"')[0] ?? "";
+assert.equal((selectedWork.match(/<article class="project-card/g) ?? []).length, 3, "Selected Work must contain exactly three projects");
+assert.doesNotMatch(selectedWork, /Fama-French|fama-french|GRS Bootstrap p = 0\.010|Korea HML t = 3\.89/, "The Fama-French project must be removed from Selected Work");
 const projectTitlePositions: number[] = projectTitles.map((title: string): number => selectedWork.indexOf(title));
-assert.ok(projectTitlePositions.every((position: number): boolean => position >= 0), "All four requested projects must appear in Selected Work");
+assert.ok(projectTitlePositions.every((position: number): boolean => position >= 0), "All three requested projects must appear in Selected Work");
+const researchWorkflow: string = html.split('<section class="section operations-section" id="research">')[1]?.split("</section>")[0] ?? "";
+assert.doesNotMatch(researchWorkflow, /Fama-French|fama-french/, "Research to Operations must not reference the removed Fama-French project");
+assert.equal((researchWorkflow.match(/<li>/g) ?? []).length, 9, "Research to Operations must retain its nine workflow steps");
 assert.ok(
   projectTitlePositions.every((position: number, index: number): boolean => index === 0 || position > (projectTitlePositions[index - 1] ?? -1)),
   "Selected Work projects must follow the requested order",
 );
-passedChecks.push("four requested projects in ISAAC-aligned order");
+assert.equal((html.match(/Fama-French Research/g) ?? []).length, 1, "Fama-French must remain only as HY-FIN activity history");
+passedChecks.push("three requested projects in ISAAC-aligned order, with Fama-French retained only in HY-FIN history");
 
 const ids: string[] = Array.from(html.matchAll(/\bid="([^"]+)"/g))
   .map((match: RegExpMatchArray): string | undefined => match[1])
@@ -83,7 +89,7 @@ passedChecks.push("unique section identifiers and working in-page links");
 const repositoryLinks: RegExpMatchArray[] = Array.from(
   html.matchAll(/href="(https:\/\/github\.com\/bucheoncityboy\/[^"]+)"/g),
 );
-assert.ok(repositoryLinks.length >= 6, "Project cards must link to their public GitHub repositories");
+assert.ok(repositoryLinks.length >= 5, "Remaining project cards must link to their public GitHub repositories");
 assert.equal((html.match(/href="https:\/\/github\.com\/bucheoncityboy"/g) ?? []).length, 3, "Navigation, hero, and contact GitHub links must point to the GitHub profile");
 assert.doesNotMatch(html, /href="https:\/\/github\.com\/bucheoncityboy\/portfolio-index"/, "Main GitHub links must not point to the portfolio-index repository");
 assert.doesNotMatch(html, /\b010[- ]\d{3,4}[- ]\d{4}\b/, "A phone number must not be published");
@@ -102,7 +108,8 @@ passedChecks.push("GitHub Pages artifact and deployment configuration");
 const stylesheet: string = readFileSync(stylesheetPath, "utf8");
 assert.match(stylesheet, /@media \(max-width: 720px\)/);
 assert.match(stylesheet, /\.project-grid, \.additional-grid \{ grid-template-columns: 1fr/);
-assert.match(stylesheet, /\.project-cross-market \{ grid-column: 1 \/ -1; \}/);
+assert.match(stylesheet, /\.project-grid \{\s*display: grid;\s*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+assert.doesNotMatch(stylesheet, /project-cross-market/, "Fama-French-only grid styling must be removed");
 assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
 assert.match(stylesheet, /\.ops-layout \{\s*display: block;\s*\}/);
 assert.match(stylesheet, /\.ops-steps::before \{[\s\S]*?background: #c8d2df;/);

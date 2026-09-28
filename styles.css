@@ -570,7 +570,6 @@ a:focus-visible {
 .project-standard .project-description { max-width: 820px; font-size: 12px; }
 .project-standard .project-description + .project-description { margin-top: 10px; }
 .project-standard .card-link { margin-top: auto; padding-top: 19px; }
-.project-cross-market { grid-column: 1 / -1; }
 
 .detail-label {
   margin-right: 7px;
@@ -926,7 +925,6 @@ a:focus-visible {
   .featured-metric > span { text-align: left; font-size: 8px; }
   .side-footnote { font-size: 7px; }
   .project-grid, .additional-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
-  .project-cross-market { grid-column: auto; }
   .project-standard { padding: 23px 21px 21px; }
   .project-standard h3 { font-size: 22px; }
   .project-standard .project-description { min-height: 0; }

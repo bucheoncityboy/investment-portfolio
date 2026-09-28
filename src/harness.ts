@@ -33,7 +33,7 @@ const requiredContent: ReadonlyArray<ContentCheck> = [
   { label: "Hanyang University spelling", fragment: "HANYANG UNIVERSITY" },
   { label: "official Certified Investment Manager title", fragment: "Certified Investment Manager" },
   { label: "the merged K-Skill contribution", fragment: "K-SKILL · OFFICIAL CONTRIBUTOR" },
-  { label: "the K-Skill pull request proof link", fragment: "https://github.com/NomaDamas/k-skill/pull/675" },
+  { label: "K-Skill accepted feature documentation link", fragment: "https://github.com/NomaDamas/k-skill/blob/main/docs/features/multi-asset-morning-briefing.md" },
   { label: "HAQR downside risk and position sizing", fragment: "AI/ML 기반 하방위험 예측 및<br>포지션 사이징 연구" },
   { label: "HAQR card explains its investment problem in plain language", fragment: "기존 메타라벨링은 거래의 진입 여부를 판단하는 데 유용하지만" },
   { label: "HAQR card has a descriptive subtitle", fragment: "Conditional Return Distribution &amp; Position Sizing" },
@@ -65,6 +65,10 @@ const projectTitles: string[] = [
 ];
 const selectedWork: string = html.split('id="work"')[1]?.split('id="research"')[0] ?? "";
 assert.equal((selectedWork.match(/<article class="project-card/g) ?? []).length, 3, "Selected Work must contain exactly three projects");
+const selectedDescriptions: string[] = selectedWork.match(/<p class="project-description">[\s\S]*?<\/p>/g) ?? [];
+assert.ok(selectedDescriptions.length > 0, "Selected Work descriptions must remain present");
+assert.ok(selectedDescriptions.every((description: string): boolean => !/<br\b/i.test(description)), "Project description paragraphs must wrap naturally");
+assert.doesNotMatch(html, /<p class="hero-lede">[^<]*<br\b/i, "Hero descriptions must wrap naturally");
 assert.doesNotMatch(selectedWork, /Fama-French|fama-french|GRS Bootstrap p = 0\.010|Korea HML t = 3\.89/, "The Fama-French project must be removed from Selected Work");
 assert.doesNotMatch(selectedWork, /HAQR/, "The HAQR acronym must not be prominent in Selected Work");
 const projectTitlePositions: number[] = projectTitles.map((title: string): number => selectedWork.indexOf(title));
@@ -121,6 +125,12 @@ assert.doesNotMatch(stylesheet, /project-cross-market/, "Fama-French-only grid s
 assert.match(stylesheet, /#work \.project-featured-main > \.project-description \+ \.project-description \{ margin-top: 17px; \}/);
 assert.match(stylesheet, /#work \.project-standard \.project-description \+ \.project-description \{ margin-top: 14px; \}/);
 assert.match(stylesheet, /#work \.detail-label \{\s*display: block;\s*margin: 0 0 6px;\s*color: var\(--blue\);\s*font: 600 9px var\(--mono\);/);
+assert.match(stylesheet, /text-align:\s*left;\s*text-wrap:\s*pretty/);
+assert.match(stylesheet, /word-break:\s*keep-all;\s*overflow-wrap:\s*break-word/);
+assert.doesNotMatch(stylesheet, /text-align:\s*justify/i, "Body copy must not use justified alignment");
+assert.match(stylesheet, /\.project-featured-main > \.project-description \{ max-width: 690px; \}/);
+assert.match(stylesheet, /\.project-standard \.project-description \{ max-width: 820px; font-size: 12\.5px; \}/);
+assert.match(stylesheet, /#work \.project-featured-main > \.project-description \+ \.project-description \{ margin-top: 14px; \}/);
 assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
 assert.match(stylesheet, /\.ops-layout \{\s*display: block;\s*\}/);
 assert.match(stylesheet, /\.ops-steps::before \{[\s\S]*?background: #c8d2df;/);

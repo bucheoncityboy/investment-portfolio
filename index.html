@@ -132,7 +132,7 @@
                 <span class="project-badge">FEATURED</span>
               </div>
               <h3>미국 대형주 전략 검증 및<br>실계좌 주문 파이프라인</h3>
-              <p class="project-description"><span class="detail-label">APPROACH</span>개인 프로젝트로 미국 대형주 전략을 설계하고, 과거 데이터에서 확인한 성과가 새로운 기간에서도 유지되는지 검증했습니다. 실제 투자 시점에서 확인할 수 있는 정보만 사용해 전략을 평가하는 데 초점을 맞췄습니다. IS와 OOS를 분리하고 시간순 5개 Fold의 Walk-Forward 방식을 적용했으며, 월말 신호는 다음 영업일 시가에 체결하고 왕복 10bp의 거래비용을 반영했습니다.</p>
+              <p class="project-description"><span class="detail-label">APPROACH</span>개인 프로젝트로 미국 대형주 전략을 설계하고, 과거 데이터에서 확인한 성과가 새로운 기간에서도 유지되는지 검증했습니다. 실제 투자 시점에서 확인할 수 있는 정보만 사용해 전략을 평가하는 데 초점을 맞췄습니다. IS와 OOS를 분리하고 시간순 5개 Fold의 Walk-Forward 방식을 적용했으며, 월말 신호는 다음 영업일 시가에 체결하는 것으로 설정하고 왕복 10bp의 거래비용을 반영했습니다.</p>
               <p class="project-description"><span class="detail-label">VALIDATION</span>각 시점에서 확인 가능한 데이터만 사용해 미래정보 누수를 통제하고, IID 및 Block Bootstrap과 파라미터 민감도 검증으로 성과가 특정 기간이나 설정에 의존하는지 점검했습니다. 검증한 전략은 매월 종목 선정과 목표비중 산출로 연결하고, 현재 포지션과 비교해 리밸런싱과 주문이 생성되도록 구현했습니다.</p>
               <p class="project-description"><span class="detail-label">INVESTMENT RELEVANCE</span>실계좌 주문 경로를 시험해 실제 체결을 확인하고, 체결 결과가 Excel 원장과 보유 포지션에 반영되도록 구성했습니다. 이를 통해 투자로직의 검증 결과가 목표비중과 주문으로 이어지고 실제 계좌에 반영되는 운용 흐름을 확인했습니다. 체결 건수는 주문 경로 테스트 결과이며 장기 투자성과를 의미하지 않습니다.</p>
               <div class="process-line" aria-label="Research, Out of Sample and Walk Forward, Portfolio Construction, Target Weights, Orders, Execution and Reconciliation">
@@ -164,10 +164,10 @@
               </div>
               <h3>AI/ML 기반 하방위험 예측 및<br>포지션 사이징 연구</h3>
               <p class="project-subtitle">Conditional Return Distribution &amp; Position Sizing</p>
-              <p class="project-description"><span class="detail-label">RESEARCH QUESTION</span>학부연구생으로 금융시계열의 불확실성을 투자 비중 결정에 활용하는 방법을 연구했습니다. 기존 메타라벨링은 거래의 진입 여부를 판단하는 데 유용하지만 수익률의 손실 규모와 변동 범위를 하나의 확률로 요약한다는 한계가 있다고 봤습니다. 이에 조건부 수익률 분포와 하방위험을 직접 추정하고 이를 포지션 사이징에 활용하는 모델을 설계했습니다.</p>
+              <p class="project-description"><span class="detail-label">RESEARCH QUESTION</span>학부연구생으로 금융시계열의 불확실성을 투자 비중 결정에 활용하는 방법을 연구했습니다. 기존 메타라벨링은 거래의 진입 여부를 판단하는 데 유용하지만, 거래 성공 확률만으로는 예상 손실 규모와 수익률의 변동 범위를 충분히 파악하기 어렵다고 봤습니다. 이에 조건부 수익률 분포와 하방위험을 직접 추정하고 이를 포지션 사이징에 활용하는 모델을 설계했습니다.</p>
               <p class="project-description"><span class="detail-label">VALIDATION &amp; RELEVANCE</span>추세정보와 시장정보를 구분해 처리하고 Quantile Regression을 활용해 조건부 수익률 분포를 추정했습니다. 예측된 불확실성이 커질수록 투자 노출을 줄이는 방식으로 포지션 사이징에 연결했습니다. Tuned LightGBM과 Lag-Llama를 비교군으로 두고 100회 반복실험, 예측구간 검증, F-Fidelity와 Ablation Study를 통해 모델을 평가했습니다.</p>
               <div class="metric-pair">
-                <div><strong>−7.4%</strong><span>Pinball loss vs. LightGBM</span></div>
+                <div><strong>−7.4%</strong><span>Pinball loss vs. Tuned LightGBM</span></div>
                 <div><strong>91.48%</strong><span>90% interval coverage</span></div>
               </div>
               <p class="experiment-note">RESEARCH RESULT · NOT REALIZED INVESTMENT PERFORMANCE</p>

@@ -129,7 +129,7 @@ assert.match(stylesheet, /text-align:\s*left;\s*text-wrap:\s*pretty/);
 assert.match(stylesheet, /word-break:\s*keep-all;\s*overflow-wrap:\s*break-word/);
 assert.doesNotMatch(stylesheet, /text-align:\s*justify/i, "Body copy must not use justified alignment");
 assert.match(stylesheet, /\.project-featured-main > \.project-description \{ max-width: 690px; \}/);
-assert.match(stylesheet, /\.project-standard \.project-description \{ max-width: 820px; font-size: 12\.5px; \}/);
+assert.match(stylesheet, /\.project-standard \.project-description \{ max-width: 820px; font-size: 13px; \}/);
 assert.match(stylesheet, /#work \.project-featured-main > \.project-description \+ \.project-description \{ margin-top: 14px; \}/);
 assert.match(stylesheet, /\.operations-section \{\s*border-block: 1px solid #e1e6ed;\s*background: #f1f3f6;\s*color: #25324a;\s*\}/);
 assert.match(stylesheet, /\.ops-layout \{\s*display: block;\s*\}/);

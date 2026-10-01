@@ -102,8 +102,8 @@ const repositoryLinks: RegExpMatchArray[] = Array.from(
   html.matchAll(/href="(https:\/\/github\.com\/bucheoncityboy\/[^"]+)"/g),
 );
 assert.ok(repositoryLinks.length >= 5, "Remaining project cards must link to their public GitHub repositories");
-assert.equal((html.match(/href="https:\/\/github\.com\/bucheoncityboy"/g) ?? []).length, 3, "Navigation, hero, and contact GitHub links must point to the GitHub profile");
-assert.doesNotMatch(html, /href="https:\/\/github\.com\/bucheoncityboy\/portfolio-index"/, "Main GitHub links must not point to the portfolio-index repository");
+assert.equal((html.match(/href="https:\/\/github\.com\/bucheoncityboy\/portfolio-index"/g) ?? []).length, 3, "Navigation, hero, and contact GitHub links must point to the portfolio-index repository");
+assert.doesNotMatch(html, /href="https:\/\/github\.com\/bucheoncityboy"/, "Main GitHub links must not point to the GitHub profile");
 assert.doesNotMatch(html, /\b010[- ]\d{3,4}[- ]\d{4}\b/, "A phone number must not be published");
 assert.doesNotMatch(html, /US Factor Live Execution|LIVE EXECUTION TRACKED/, "Order-route testing must not imply sustained live operations");
 assert.doesNotMatch(html, /실제\s*운용|live operations|live portfolio|production trading|real portfolio operations|실제 투자 운용/i, "The portfolio must not claim sustained real-account operations");
